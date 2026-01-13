@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PgMP Practice Exam - Quiz 3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 30px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .exam-info {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .options {
+            margin: 20px 0;
+        }
+
+        .option {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .option label {
+            cursor: pointer;
+            display: inline;
+        }
+
+        .submit-btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .submit-btn:hover {
+            background: #764ba2;
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .correct-answer {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+        }
+
+        .wrong-answer {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            font-weight: bold;
+        }
+
+        .option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .option.not-selected {
+            opacity: 0.6;
+        }
+
+        .explanation {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .explanation h4 {
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+
+        .explanation p {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .score-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .score-summary.show {
+            display: block;
+        }
+
+        .score-summary h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .score-summary p {
+            font-size: 1.2em;
+        }
+
+        .reset-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .reset-btn:hover {
+            background: #ee5a52;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .question-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PgMP Practice Exam - Quiz 3</h1>
+        <div class="exam-info">
+            <p><strong>Program Management Professional Practice Exam</strong></p>
+            <p>55 Questions | Select the best answer for each question</p>
+        </div>
+
+        <div id="score-summary" class="score-summary">
+            <h2 id="score-text"></h2>
+            <p id="score-details"></p>
+        </div>
+
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 1</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager of the relocation of the headquarter office from the downtown to the industrial area. Some of the stakeholders are against the program and others are supportive of the program. As a program manager, what will you do first?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q1a" name="q1" value="A">
+                        <label for="q1a">Define the expectations of all stakeholders about the program.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1b" name="q1" value="B">
+                        <label for="q1b">Identify the supportive stakeholders only and send them all the documents of the program.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1c" name="q1" value="C">
+                        <label for="q1c">Identify the negative stakeholders only and send them all the documents of the program.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q1d" name="q1" value="D">
+                        <label for="q1d">Send them the mission, vision, and benefits of the program with the clarification of how the program will benefit the stakeholders and the organization.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q1"></div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 2</span>
+                </div>
+                <div class="question-text">
+                    Program management office (PMO) and Program management information system (PMIS) are very important elements in program management. PMO establishes consistent policy, standards, and training for the program. The program management information system (PMIS) consists of tools used to collect, integrate, and communicate the program information. The above elements are parts of --------------.
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q2a" name="q2" value="A">
+                        <label for="q2a">Program Governance framework.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2b" name="q2" value="B">
+                        <label for="q2b">Program management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2c" name="q2" value="C">
+                        <label for="q2c">Program infrastructure.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q2d" name="q2" value="D">
+                        <label for="q2d">Program information management plan.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q2"></div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 3</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager for the construction of a new power plant program. The program charter is approved, and now you officially commence the program planning sub-phase. During this sub-phase, the governance structure is established, the initial program organization is defined, and a team is assembled to develop the program management plan. Within the above context, which of the following is least likely for an effective governance structure?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q3a" name="q3" value="A">
+                        <label for="q3a">Creating an environment for communicating and addressing program risks and uncertainties to the organization, as well as opportunities and issues that arise during the course of program performance.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3b" name="q3" value="B">
+                        <label for="q3b">Ensuring that the goals of the program remain aligned with the strategic vision, operational capabilities, and resource commitments of the sponsoring organization.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3c" name="q3" value="C">
+                        <label for="q3c">Making decisions to transition between phases, terminate, or close the program.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q3d" name="q3" value="D">
+                        <label for="q3d">Resolution of project issues at the project level.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q3"></div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 4</span>
+                </div>
+                <div class="question-text">
+                    You are a member of the selection committee to select the programs and projects that your organizations will pursuit next season. One of the selected programs is for socioeconomic changes. This program contains 3 projects and one subsidiary program. One of the projects for improving the level of behavior and morality in the neighborhood. In which of the following do you document the output/outcome of that project?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q4a" name="q4" value="A">
+                        <label for="q4a">Benefits management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4b" name="q4" value="B">
+                        <label for="q4b">Program risk register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4c" name="q4" value="C">
+                        <label for="q4c">Program business case.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q4d" name="q4" value="D">
+                        <label for="q4d">Program management plan.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q4"></div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 5</span>
+                </div>
+                <div class="question-text">
+                    You are a manager of a large program. The program contains 7 projects and 3 subsidiary programs. While you are discussing the benefits register with the key stakeholders, for a clear understanding of stakeholders, you should map the benefits to program components as in ----------
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q5a" name="q5" value="A">
+                        <label for="q5a">The program roadmap.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5b" name="q5" value="B">
+                        <label for="q5b">The benefits management plan</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5c" name="q5" value="C">
+                        <label for="q5c">The program business case.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q5d" name="q5" value="D">
+                        <label for="q5d">The stakeholder map.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q5"></div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 6</span>
+                </div>
+                <div class="question-text">
+                    Which of the following is logically linking components, milestones, and high-level activities necessary to deliver program benefits?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q6a" name="q6" value="A">
+                        <label for="q6a">Program Benefits register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6b" name="q6" value="B">
+                        <label for="q6b">Program Roadmap.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6c" name="q6" value="C">
+                        <label for="q6c">Program Architecture.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q6d" name="q6" value="D">
+                        <label for="q6d">Program Master Schedule.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q6"></div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 7</span>
+                </div>
+                <div class="question-text">
+                    Your company had been awarded a new program. You are the program manager of that program. The stakeholders don't know why the program will be pursued and they don't have any visibility about the program. Within the above context, what is the best document that will be used?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q7a" name="q7" value="A">
+                        <label for="q7a">Program charter.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7b" name="q7" value="B">
+                        <label for="q7b">Program high-level scope statement.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7c" name="q7" value="C">
+                        <label for="q7c">Program benefits register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q7d" name="q7" value="D">
+                        <label for="q7d">Program business case.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q7"></div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 8</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager of a new hospital which aims to improve the treatment procedures. The components have been initiated to achieve the program objectives and benefits. One of these components is for the construction of a modern nursery for the employee's babies. During the evaluation of these component benefits, the stakeholders are not agreeing about the value that will be delivered from this component. As a program manager, what is the reason for this problem?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q8a" name="q8" value="A">
+                        <label for="q8a">The expected levels of value that will be delivered from the tangible and intangible benefits are not clearly documented in the business case.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8b" name="q8" value="B">
+                        <label for="q8b">The stakeholders are not identified in the stakeholder register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8c" name="q8" value="C">
+                        <label for="q8c">The stakeholders are not contributing to the program activities.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q8d" name="q8" value="D">
+                        <label for="q8d">Program benefits register.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q8"></div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 9</span>
+                </div>
+                <div class="question-text">
+                    You are a member in the selection committee. The following data has been given:<br>
+                    Program A: Cost = 30,000,000 and CBR=0.8<br>
+                    Program B: Cost = 20,000,000 and CBR=0.5<br>
+                    Program C: Cost = 40,000,000 and CBR=0.7<br>
+                    Program D: Cost = 35,000,000 and CBR=1.5<br>
+                    What program will be selected?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q9a" name="q9" value="A">
+                        <label for="q9a">Program A.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9b" name="q9" value="B">
+                        <label for="q9b">Program B.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9c" name="q9" value="C">
+                        <label for="q9c">Program C.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q9d" name="q9" value="D">
+                        <label for="q9d">Program D.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q9"></div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 10</span>
+                </div>
+                <div class="question-text">
+                    The stakeholders may be internal or external to the program and may have a positive or negative impact on the outcome of the program. Program and project managers need to be aware of the stakeholders' impact and level of influence to understand and address the changing environments of programs and projects. Within the above context, you decided to categorize the stakeholders' relationships to the program. Which of the following documents can help you?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q10a" name="q10" value="A">
+                        <label for="q10a">Program business case.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10b" name="q10" value="B">
+                        <label for="q10b">Program Communication management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10c" name="q10" value="C">
+                        <label for="q10c">Program Stakeholders register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q10d" name="q10" value="D">
+                        <label for="q10d">Program stakeholder engagement plan.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q10"></div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 11</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager of a telecommunication program. The program contains 3 projects. Now your program is in the delivery phase and the earned value calculations are as per the given data. Within the above context, what is the situation of the program?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q11a" name="q11" value="A">
+                        <label for="q11a">The program is ahead of schedule and you spent more than planned.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q11b" name="q11" value="B">
+                        <label for="q11b">The program is ahead of schedule and your performance is more than planned.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q11c" name="q11" value="C">
+                        <label for="q11c">The program is ahead of schedule and over budget.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q11d" name="q11" value="D">
+                        <label for="q11d">The program is late and you spent less than planned.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q11"></div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 12</span>
+                </div>
+                <div class="question-text">
+                    Your program is in the delivery phase and three components need to start. You want to identify the component managers. What will you do?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q12a" name="q12" value="A">
+                        <label for="q12a">Contacting your colleagues.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q12b" name="q12" value="B">
+                        <label for="q12b">Contacting the human resource team to get profiles.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q12c" name="q12" value="C">
+                        <label for="q12c">Contacting the functional manager for profiles.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q12d" name="q12" value="D">
+                        <label for="q12d">Hiring from the local market.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q12"></div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 13</span>
+                </div>
+                <div class="question-text">
+                    Kelly is a manager of an infrastructure program for her organization SDF Inc. During the planning meeting with the team, she is discussing a document that contains the boundaries of the program scope. Which of the following documents is she discussing?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q13a" name="q13" value="A">
+                        <label for="q13a">Program Business Case.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q13b" name="q13" value="B">
+                        <label for="q13b">Program Charter.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q13c" name="q13" value="C">
+                        <label for="q13c">Program Work breakdown structure.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q13d" name="q13" value="D">
+                        <label for="q13d">Program Scope Statement.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q13"></div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 14</span>
+                </div>
+                <div class="question-text">
+                    Your program contains 15 projects, 3 subsidiary programs, and program activities. While you and the component managers are in the meeting, you notice that one of the component managers is always not participating in the meeting discussion and setting silent all the time. What should you do first to know his point of view?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q14a" name="q14" value="A">
+                        <label for="q14a">Escalate to the program governance board.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q14b" name="q14" value="B">
+                        <label for="q14b">Request everyone in the meeting to say his point of view about the meeting.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q14c" name="q14" value="C">
+                        <label for="q14c">Escalate to the Program Sponsor.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q14d" name="q14" value="D">
+                        <label for="q14d">Arrange training for him in communication skills.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q14"></div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 15</span>
+                </div>
+                <div class="question-text">
+                    You are discussing the program with an individual or a group that is required to drive changes through the organization so the operations can accommodate capabilities delivered by the program and to secure the available positive benefits and steward the handling of negative benefits. Who is that individual or group?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q15a" name="q15" value="A">
+                        <label for="q15a">Program Management office.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q15b" name="q15" value="B">
+                        <label for="q15b">Program Governance board.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q15c" name="q15" value="C">
+                        <label for="q15c">Program Sponsor.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q15d" name="q15" value="D">
+                        <label for="q15d">Executive manager.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q15"></div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 16</span>
+                </div>
+                <div class="question-text">
+                    While you are in the delivery phase, two of the component managers need the senior consultant who is working at the program level and after discussion with them, you discovered that they need the consultant at the same time. What should you do?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q16a" name="q16" value="A">
+                        <label for="q16a">Hire additional senior consultant to assign one for each component.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q16b" name="q16" value="B">
+                        <label for="q16b">Use resources interdependency management by careful controlling of the schedule for scarce resources.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q16c" name="q16" value="C">
+                        <label for="q16c">Assign the senior consultant to the components as prioritized by the guidelines in the program resources management plan.</label>
+                    </div>
+                    <div class="option">
+					<input type="radio" id="q16d" name="q16" value="D">
+                        <label for="q16d">Assign the senior consultant to the components as prioritized by him.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q16"></div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 17</span>
+                </div>
+                <div class="question-text">
+                    In your program, you have defined key performance indicators and metrics for stakeholders and their desired engagement. As a program manager, what is the next step?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q17a" name="q17" value="A">
+                        <label for="q17a">You should monitor and track the stakeholder engagement with help of the defined metrics and KPIs.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q17b" name="q17" value="B">
+                        <label for="q17b">Get the approval of the steering committee for the metrics and KPIs.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q17c" name="q17" value="C">
+                        <label for="q17c">Document the key performance indicators and the metrics in the program stakeholder engagement plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q17d" name="q17" value="D">
+                        <label for="q17d">Document the key performance indicators and the metrics in the stakeholder register.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q17"></div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 18</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager of the construction of a new airport. You know that the Civil Aviation Authority is waiting impatiently for the airport. The delivery date of the airport after two days only. It's very important to deliver the program in time and any delay will irritate the client. The delivery is a major milestone for the program. The program performance was very good. But now you discovered technical points that can't be rectified before the delivery date. Within the above context, what will you do?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q18a" name="q18" value="A">
+                        <label for="q18a">Inform the customer in a virtual meeting about the technical points, without documenting anything about these points and release the airport.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q18b" name="q18" value="B">
+                        <label for="q18b">Release the airport without any reference about these points.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q18c" name="q18" value="C">
+                        <label for="q18c">Develop a clear document of these technical points and their impacts, and Inform the customer in a virtual meeting about them, then get their preference about releasing the airport.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q18d" name="q18" value="D">
+                        <label for="q18d">Escalate the problem to the program steering committee to get approval to release the airport without mentioning anything about these points.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q18"></div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 19</span>
+                </div>
+                <div class="question-text">
+                    In your program, you are preparing the stakeholder engagement plan. One of the key stakeholders informs you that you have to perform stakeholder analysis and planning before developing the stakeholder engagement plan. You agree with the key stakeholder. Within the above context, what will you do first?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q19a" name="q19" value="A">
+                        <label for="q19a">Identify all stakeholders by using brainstorming techniques.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q19b" name="q19" value="B">
+                        <label for="q19b">Develop the program communication management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q19c" name="q19" value="C">
+                        <label for="q19c">Evaluate the stakeholders' ability to influence the outcome of the program.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q19d" name="q19" value="D">
+                        <label for="q19d">Understanding of expectation of program benefits delivery.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q19"></div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 20</span>
+                </div>
+                <div class="question-text">
+                    Your program is the construction of 15 buildings inside the university. While you are in the execution phase, the sponsor informed you to upgrade three existing buildings. What will you do first?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q20a" name="q20" value="A">
+                        <label for="q20a">Update the benefits management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q20b" name="q20" value="B">
+                        <label for="q20b">Understand the stakeholders' expectations.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q20c" name="q20" value="C">
+                        <label for="q20c">Identify the stakeholders of the three existing buildings.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q20d" name="q20" value="D">
+                        <label for="q20d">Add the benefits of the three buildings in the benefits register.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q20"></div>
+            </div>
+
+            <!-- Question 21 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 21</span>
+                </div>
+                <div class="question-text">
+                    You are defining and prioritizing the program components and their interdependencies to create .....
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q21a" name="q21" value="A">
+                        <label for="q21a">Risk management strategy.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q21b" name="q21" value="B">
+                        <label for="q21b">Program Charter.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q21c" name="q21" value="C">
+                        <label for="q21c">Program Roadmap.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q21d" name="q21" value="D">
+                        <label for="q21d">Program benefits management plan.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q21"></div>
+            </div>
+
+            <!-- Question 22 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 22</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager of an important program for your company. Now you are in the initiation stage developing a milestone plan. Which of the following contains the above information?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q22a" name="q22" value="A">
+                        <label for="q22a">Program benefits management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q22b" name="q22" value="B">
+                        <label for="q22b">Program benefits register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q22c" name="q22" value="C">
+                        <label for="q22c">Program Charter.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q22d" name="q22" value="D">
+                        <label for="q22d">Program Roadmap.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q22"></div>
+            </div>
+
+            <!-- Question 23 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 23</span>
+                </div>
+                <div class="question-text">
+                    While you are identifying the program outputs and outcomes to provide benefits aligned with the organization's strategic goals and objectives, the sponsor asks you this question, when will the program strategic alignment be performed? Your answer is...
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q23a" name="q23" value="A">
+                        <label for="q23a">During the definition phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q23b" name="q23" value="B">
+                        <label for="q23b">During the closing phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q23c" name="q23" value="C">
+                        <label for="q23c">During the delivery phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q23d" name="q23" value="D">
+                        <label for="q23d">Throughout the program life cycle.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q23"></div>
+            </div>
+
+            <!-- Question 24 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 24</span>
+                </div>
+                <div class="question-text">
+                    You are analyzing the stakeholders information that you have collected through interviews, focus groups, and historical information. The information is about the stakeholders' influence and impacts on the program, about who influences whom, the relations between the stakeholders, and who are in conflict with whom. All this information will be documented in.......
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q24a" name="q24" value="A">
+                        <label for="q24a">Benefits register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q24b" name="q24" value="B">
+                        <label for="q24b">Stakeholders engagement plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q24c" name="q24" value="C">
+                        <label for="q24c">Stakeholders register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q24d" name="q24" value="D">
+                        <label for="q24d">Communication management plan.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q24"></div>
+            </div>
+
+            <!-- Question 25 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 25</span>
+                </div>
+                <div class="question-text">
+                    You are a manager of the construction of a new airport program in your city. Your program contains 11 projects and is now in the execution stage. While you are in a meeting with the sponsor, he requests you to provide the performance of the project managers by next week. Which of the following is most likely considered to do that?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q25a" name="q25" value="A">
+                        <label for="q25a">Benefits management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q25b" name="q25" value="B">
+                        <label for="q25b">Program management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q25c" name="q25" value="C">
+                        <label for="q25c">Governance plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q25d" name="q25" value="D">
+                        <label for="q25d">Project management plans.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q25"></div>
+            </div>
+
+            <!-- Question 26 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 26</span>
+                </div>
+                <div class="question-text">
+                    While you are in the delivery phase of your program which contains 10 projects and two subsidiary programs. The component managers are assigned early in the delivery phase. You noticed that some of them don't know how to interact with other components and don't know how to identify the issues, risks, and dependencies that may impact other program components. Within the above context, what will you do?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q26a" name="q26" value="A">
+                        <label for="q26a">Provide training to the component managers on program benefits, objectives, strategy, and goals.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q26b" name="q26" value="B">
+                        <label for="q26b">Review the program charter with the component managers</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q26c" name="q26" value="C">
+                        <label for="q26c">Update the benefits management plan with the component managers.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q26d" name="q26" value="D">
+                        <label for="q26d">Understand the expectations and needs of the component managers.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q26"></div>
+            </div>
+
+            <!-- Question 27 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 27</span>
+                </div>
+                <div class="question-text">
+                    One of the stakeholders submitted you a request to change some points in the program, you discussed that request with the stakeholder and you started the impact analysis of that request. You found that the request will impact the program scope, schedule, cost, and benefits. You submitted the change request with the analysis to the program governance board for approval. After three days the governance board replied with approval, immediately you documented the approval in the change log. Within the above context, what will you do next?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q27a" name="q27" value="A">
+                        <label for="q27a">Update the change log.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q27b" name="q27" value="B">
+                        <label for="q27b">Communicate the approval to the stakeholders.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q27c" name="q27" value="C">
+                        <label for="q27c">Update the program management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q27d" name="q27" value="D">
+                        <label for="q27d">Update risk, schedule, cost, scope, and benefits management plans.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q27"></div>
+            </div>
+
+            <!-- Question 28 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 28</span>
+                </div>
+                <div class="question-text">
+                    Program stakeholder communication is at the heart of program stakeholder engagement. It is key to executing program endeavors and, ultimately, delivering benefits to the organization. This critical component is a vehicle for information sharing, negotiation, and collaboration among the program team members to drive program implementation efforts. Within the above context, who is accountable for the above?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q28a" name="q28" value="A">
+                        <label for="q28a">Program Manager.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q28b" name="q28" value="B">
+                        <label for="q28b">Program Management Office.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q28c" name="q28" value="C">
+                        <label for="q28c">Project Managers.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q28d" name="q28" value="D">
+                        <label for="q28d">Program Sponsor.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q28"></div>
+            </div>
+
+            <!-- Question 29 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 29</span>
+                </div>
+                <div class="question-text">
+                    DSDS is a large organization in the production of steel. They want to increase productivity by the construction of a new factory. The management assigned you as a program manager for the construction of the new factory. Now you are in a meeting with your team identifying the impacts to the program components from overruns or underruns. In which phase are you?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q29a" name="q29" value="A">
+                        <label for="q29a">Program Closing Phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q29b" name="q29" value="B">
+                        <label for="q29b">Program Delivery Phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q29c" name="q29" value="C">
+                        <label for="q29c">Program Planning Sub-Phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q29d" name="q29" value="D">
+                        <label for="q29d">Program Definition Phase.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q29"></div>
+            </div>
+
+            <!-- Question 30 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 30</span>
+                </div>
+                <div class="question-text">
+                    Your program is designed to produce a new generation of electric cars. While you are in the formulation sub-phase, the sponsor informs you that MeCa Company is planning to produce the same type of cars. Immediately you started the environmental analysis. Which of the following will you use?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q30a" name="q30" value="A">
+                        <label for="q30a">What-if analyses.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q30b" name="q30" value="B">
+                        <label for="q30b">SWOT Analysis for optimizing the program charter and program management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q30c" name="q30" value="C">
+                        <label for="q30c">Feasibility studies.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q30d" name="q30" value="D">
+                        <label for="q30d">Assumptions analysis.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q30"></div>
+            </div>
+
+            <!-- Question 31 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 31</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager for the construction of the infrastructure of a new Village. After some analysis, you defined a misalignment between the components and the organization's strategic plan elements. Which of the following are the least significant elements in the organization's strategic plan?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q31a" name="q31" value="A">
+                        <label for="q31a">Strategic goals and objectives</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q31b" name="q31" value="B">
+                        <label for="q31b">Values.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q31c" name="q31" value="C">
+                        <label for="q31c">Organization's vision.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q31d" name="q31" value="D">
+                        <label for="q31d">Organization's mission.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q31"></div>
+            </div>
+
+            <!-- Question 32 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 32</span>
+                </div>
+                <div class="question-text">
+                    Your program is critical for your organization's investments. The sponsor informed you that all the high management focuses on this program and its performance, so you decided to increase the number of health checks. Which of the following can affect the number of the previous activities?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q32a" name="q32" value="A">
+                        <label for="q32a">Stakeholders register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q32b" name="q32" value="B">
+                        <label for="q32b">The period between scheduled decision-point reviews.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q32c" name="q32" value="C">
+                        <label for="q32c">Program risk tolerance.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q32d" name="q32" value="D">
+                        <label for="q32d">The number of the change requests.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q32"></div>
+            </div>
+
+            <!-- Question 33 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 33</span>
+                </div>
+                <div class="question-text">
+                    You are the program manager of the construction of a high dam in your country. The program consists of 20 projects and 7 subsidiary programs. The program management plan has been approved. Now you are in the delivery phase, and many risks have been identified, some of these risks are from projects that may impact other components in the program. You have noticed that the project managers report to each other only about the risks that may impact other projects and the program which leads to delay the program. Which of the following can avoid that problem in the future?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q33a" name="q33" value="A">
+                        <label for="q33a">Develop a program governance plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q33b" name="q33" value="B">
+                        <label for="q33b">Develop governance framework.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q33c" name="q33" value="C">
+                        <label for="q33c">Develop escalation policies and procedures.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q33d" name="q33" value="D">
+                        <label for="q33d">Develop program governance frameworks, functions, and processes.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q33"></div>
+            </div>
+
+            <!-- Question 34 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 34</span>
+                </div>
+                <div class="question-text">
+                    A key stakeholder request a change that may impact the schedule of the program, you captured the request in the change log, performed the impact analysis then take the decision on behalf of the program governance board. The key stakeholder refused your behavior and requested approval on the change request from the governance board. Which of the following will you submit to the key stakeholder to show him that you are right?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q34a" name="q34" value="A">
+                        <label for="q34a">Program Charter.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q34b" name="q34" value="B">
+                        <label for="q34b">Program Business case.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q34c" name="q34" value="C">
+                        <label for="q34c">Program Roadmap.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q34d" name="q34" value="D">
+                        <label for="q34d">Program governance plan.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q34"></div>
+            </div>
+
+            <!-- Question 35 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 35</span>
+                </div>
+                <div class="question-text">
+                    A key stakeholder request a change that may impact the schedule of the program, you captured the request in the change log, performed the impact analysis then take the decision on behalf of the program governance board. In which phase are you?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q35a" name="q35" value="A">
+                        <label for="q35a">Definition phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q35b" name="q35" value="B">
+                        <label for="q35b">Closure phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q35c" name="q35" value="C">
+                        <label for="q35c">Delivery phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q35d" name="q35" value="D">
+                        <label for="q35d">Planning sub-phase.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q35"></div>
+            </div>
+
+            <!-- Question 36 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 36</span>
+                </div>
+                <div class="question-text">
+                    You are the program manager of a construction of an airport in your city. The program consists of 15 projects and 4 subsidiary programs. The program management plan has been approved. Now you are in the delivery phase, and many risks have been identified. You have noticed that the project managers report to you all the project risks that have caused you to be preoccupied with project risks and loss of time needed to manage the program. Which of the following can avoid that problem in the future?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q36a" name="q36" value="A">
+                        <label for="q36a">Develop a program governance plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q36b" name="q36" value="B">
+                        <label for="q36b">Develop governance framework.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q36c" name="q36" value="C">
+                        <label for="q36c">Develop escalation policies and procedures.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q36d" name="q36" value="D">
+                        <label for="q36d">Develop program governance frameworks, functions, and processes.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q36"></div>
+				</div>
+
+            <!-- Question 37 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 37</span>
+                </div>
+                <div class="question-text">
+                    Kelly is a program manager of an advertisements program. Now she is in the delivery phase, and the program sponsor is worried about the current status of the program cost and benefits, within the above context, which of the following will she provide to the sponsor?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q37a" name="q37" value="A">
+                        <label for="q37a">Program Charter.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q37b" name="q37" value="B">
+                        <label for="q37b">Program performance report.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q37c" name="q37" value="C">
+                        <label for="q37c">BSC/Dashboard.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q37d" name="q37" value="D">
+                        <label for="q37d">Program business case.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q37"></div>
+            </div>
+
+            <!-- Question 38 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 38</span>
+                </div>
+                <div class="question-text">
+                    Your organization had been awarded the construction of a new airport in your city. You are the program manager of that program. While you are in the delivery phase, you are informed that one of the projects in your program is misaligned with the organization's strategic plan due to some major decisions that have been taken by the organization's CEO. Within the above context, what will you do first?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q38a" name="q38" value="A">
+                        <label for="q38a">Escalate to the Program governance board.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q38b" name="q38" value="B">
+                        <label for="q38b">Write a recommendation to close that project.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q38c" name="q38" value="C">
+                        <label for="q38c">Do the impact analysis to know the effect of closing that project on other components of the program.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q38d" name="q38" value="D">
+                        <label for="q38d">Ask your team to discuss the problem with the project manager to accelerate the project.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q38"></div>
+            </div>
+
+            <!-- Question 39 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 39</span>
+                </div>
+                <div class="question-text">
+                    Which of the following options contain the direction of the program?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q39a" name="q39" value="A">
+                        <label for="q39a">Program management plan and roadmap.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q39b" name="q39" value="B">
+                        <label for="q39b">Program business case.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q39c" name="q39" value="C">
+                        <label for="q39c">Program Roadmap.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q39d" name="q39" value="D">
+                        <label for="q39d">Program management plan.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q39"></div>
+            </div>
+
+            <!-- Question 40 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 40</span>
+                </div>
+                <div class="question-text">
+                    Your organization had been awarded the construction of a new industrial city. You are the program manager of this program. Now you and your team are developing the business case and the potential initiation of a new program to respond to some operational issues with the deployed products. Which activities are you developing?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q40a" name="q40" value="A">
+                        <label for="q40a">Program formulation activities.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q40b" name="q40" value="B">
+                        <label for="q40b">Program Benefits identification activities.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q40c" name="q40" value="C">
+                        <label for="q40c">Program Benefits transition activities.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q40d" name="q40" value="D">
+                        <label for="q40d">Program Benefits sustainment activities.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q40"></div>
+            </div>
+
+            <!-- Question 41 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 41</span>
+                </div>
+                <div class="question-text">
+                    You are assigned as a program manager for a new hospital program. Now you are in the delivery phase, one of the components is completed and you want to explain to the steering committee that this component is completed. How can you do that?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q41a" name="q41" value="A">
+                        <label for="q41a">Explain to them that the closure conditions of the component are met.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q41b" name="q41" value="B">
+                        <label for="q41b">Explain to them that the deliverables of the component are delivered successfully.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q41c" name="q41" value="C">
+                        <label for="q41c">Explain to them that the benefits of the component are delivered.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q41d" name="q41" value="D">
+                        <label for="q41d">Explain to them that the component produced the intended results in accordance with the program management plan.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q41"></div>
+            </div>
+
+            <!-- Question 42 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 42</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager of the HYC program. You completed the delivery phase and are now in the Closure phase that includes program activities necessary to transition program benefits to the sustaining organization and formally close the program in a controlled manner. Within the above context, which of the following is not included in program transition?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q42a" name="q42" value="A">
+                        <label for="q42a">Program resources disposition.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q42b" name="q42" value="B">
+                        <label for="q42b">Program steering committee approval.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q42c" name="q42" value="C">
+                        <label for="q42c">Components transition.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q42d" name="q42" value="D">
+                        <label for="q42d">The transition from as-is to to-be.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q42"></div>
+            </div>
+
+            <!-- Question 43 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 43</span>
+                </div>
+                <div class="question-text">
+                    DICKO TEC is an organization for information technology. They have been awarded one of the most important programs with the Ministry of finance. You are the program manager of this program and the customer is very happy with the program performance. Now you are in the closure phase and all the program benefits have been delivered. Within the above context, what will you do to transition the program?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q43a" name="q43" value="A">
+                        <label for="q43a">Close all components and their contracts.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q43b" name="q43" value="B">
+                        <label for="q43b">Transfer the program immediately to the customer, since they are happy with the program performance.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q43c" name="q43" value="C">
+                        <label for="q43c">Present the final performance report to the governance board.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q43d" name="q43" value="D">
+                        <label for="q43d">Complete the transition of all program components.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q43"></div>
+            </div>
+
+            <!-- Question 44 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 44</span>
+                </div>
+                <div class="question-text">
+                    MANZI is a large construction company in the Middle East. You are the program manager for the construction of a new airport program. The program is complex and has 20 components. Now you are in a meeting with the portfolio manager discussing the framework in which the portfolio, program, and projects management are integrated to achieve the strategic objectives. Which one of the following options can provide the mentioned above framework?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q44a" name="q44" value="A">
+                        <label for="q44a">Program management office PMO.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q44b" name="q44" value="B">
+                        <label for="q44b">Program governance board.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q44c" name="q44" value="C">
+                        <label for="q44c">OPM.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q44d" name="q44" value="D">
+                        <label for="q44d">Program Business Case.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q44"></div>
+            </div>
+
+            <!-- Question 45 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 45</span>
+                </div>
+                <div class="question-text">
+                    Your organization just awarded the construction of a new seaport. During the portfolio meeting, some of the members prefer to pursuit it as a project, while other members suggest pursuit it as a program to enhance the delivery of benefits. How can the program enhance the delivery of benefits?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q45a" name="q45" value="A">
+                        <label for="q45a">By ensuring that the strategies and work plans of the program are responsively adapted to changes in the direction or strategies of the sponsoring organization.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q45b" name="q45" value="B">
+                        <label for="q45b">By ensuring that the strategies and work plans of program components are responsively adapted to component outcomes, or to changes in the direction of the sponsoring organization.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q45c" name="q45" value="C">
+                        <label for="q45c">By ensuring that the strategies and work plans of the program are responsively adapted to component outcomes, or to changes in the direction or strategies of the sponsoring organization.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q45d" name="q45" value="D">
+                        <label for="q45d">By ensuring that the strategies and work plans of the program and its components are responsively adapted to component outcomes, or to changes in the direction or strategies of the sponsoring organization.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q45"></div>
+            </div>
+
+            <!-- Question 46 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 46</span>
+                </div>
+                <div class="question-text">
+                    Mark is a program manager for the construction of a new road. He is discussing with the team the program benefits and outcomes. During the discussion, a team member asks about the return of investment that may help to fund the future benefits. Within the above context, which of the following can provide a visual of when the return on investment may help funds of future program benefits?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q46a" name="q46" value="A">
+                        <label for="q46a">Program Business Case.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q46b" name="q46" value="B">
+                        <label for="q46b">Program Charter.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q46c" name="q46" value="C">
+                        <label for="q46c">Program Benefits register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q46d" name="q46" value="D">
+                        <label for="q46d">Program Roadmap.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q46"></div>
+            </div>
+
+            <!-- Question 47 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 47</span>
+                </div>
+                <div class="question-text">
+                    Your company just awarded 15 projects, each project scope is "construction of a new factory", in the same industrial city. All factories are different and all will be funded and supported by the government. All projects material will be provided from Hitachi Japan, as a preferred vendor. Now, you are a program manager of an existing program and your manager requests your proposal on; how you will manage these projects. What is the best proposal?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q47a" name="q47" value="A">
+                        <label for="q47a">Will be managed as a program.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q47b" name="q47" value="B">
+                        <label for="q47b">Will be managed as separate projects.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q47c" name="q47" value="C">
+                        <label for="q47c">Will be managed as a portfolio.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q47d" name="q47" value="D">
+                        <label for="q47d">Will be managed as a sub-program.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q47"></div>
+            </div>
+
+            <!-- Question 48 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 48</span>
+                </div>
+                <div class="question-text">
+                    DEGA is a large organization in the production of steel. They what to increase productivity by the construction of a new steel factory. The management assigned you as a program manager for the construction of the new factory. During the planning sub-phase, the program sponsor got his annual vacation. Within the above context, who may assume the role of the program sponsor?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q48a" name="q48" value="A">
+                        <label for="q48a">You, because you are the program manager.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q48b" name="q48" value="B">
+                        <label for="q48b">Program management office PMO.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q48c" name="q48" value="C">
+                        <label for="q48c">Any executive manager in the organization.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q48d" name="q48" value="D">
+                        <label for="q48d">The program steering committee.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q48"></div>
+            </div>
+
+            <!-- Question 49 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 49</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager of the construction of a new hospital. During the execution of the program, you have identified a delay in getting resources allocated to the program components. Within the above context, what is your action?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q49a" name="q49" value="A">
+                        <label for="q49a">Escalate the matter to the program sponsor.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q49b" name="q49" value="B">
+                        <label for="q49b">Escalate the matter to the PMO.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q49c" name="q49" value="C">
+                        <label for="q49c">Update the program master schedule.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q49d" name="q49" value="D">
+                        <label for="q49d">Escalate the matter to the functional manager.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q49"></div>
+            </div>
+
+            <!-- Question 50 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 50</span>
+                </div>
+                <div class="question-text">
+                    X and Y are two programs in the same portfolio. You are the program manager of Program Y, which is not critical to the portfolio. You have a risk strategy in your program that needs a scarce resource. But this scarce resource was assigned to program X. Within the above context, what will you do?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q50a" name="q50" value="A">
+                        <label for="q50a">Call the Program manager-X and request him to inform you when the scarce resource is not scheduled in his program and change your program schedule accordingly.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q50b" name="q50" value="B">
+                        <label for="q50b">Meet the program manager X for optimization of resources and need then inform the sponsor when the resource can be available to your program and plan accordingly.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q50c" name="q50" value="C">
+                        <label for="q50c">Discuss with the sponsor about program X and get the guideline to do your own work and don't think about the scarce resource.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q50d" name="q50" value="D">
+                        <label for="q50d">Perform resource prioritization process.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q50"></div>
+            </div>
+
+            <!-- Question 51 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 51</span>
+                </div>
+                <div class="question-text">
+                    You are the program manager of the construction of the new airport extension in your city. Now you are in the delivery phase and one of your team informed you that many of the products and deliverables have been tested many times by the same test which leads to increase in the cost. As a program manager, what will you do first?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q51a" name="q51" value="A">
+                        <label for="q51a">Review the program schedule management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q51b" name="q51" value="B">
+                        <label for="q51b">Review the risk management plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q51c" name="q51" value="C">
+                        <label for="q51c">Escalate to the program steering committee.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q51d" name="q51" value="D">
+                        <label for="q51d">Review the program quality management plan.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q51"></div>
+            </div>
+
+            <!-- Question 52 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 52</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager of the construction of a new tower in your city. The program contains 4 projects (project 1 up to project 4). While the program was in the delivery phase, an identified risk (R1) of project 1 occurred. Within the above context and the given data, what is the remaining contingency reserve of the program?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q52a" name="q52" value="A">
+                        <label for="q52a">1,420,000$</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q52b" name="q52" value="B">
+                        <label for="q52b">1,500,000$</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q52c" name="q52" value="C">
+                        <label for="q52c">1,460,000$</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q52d" name="q52" value="D">
+                        <label for="q52d">1,300,000$</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q52"></div>
+            </div>
+
+            <!-- Question 53 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 53</span>
+                </div>
+                <div class="question-text">
+                    You are a program manager of the construction of a new road for your organization ASDDM Inc. During the meeting, you and the sponsor are discussing the level of confidence in the appraisal of the activity durations. In which phase are you working?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q53a" name="q53" value="A">
+                        <label for="q53a">Planning Sub-phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q53b" name="q53" value="B">
+                        <label for="q53b">Formulation Sub-phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q53c" name="q53" value="C">
+                        <label for="q53c">Delivery phase.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q53d" name="q53" value="D">
+                        <label for="q53d">Closing phase.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q53"></div>
+            </div>
+
+            <!-- Question 54 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 54</span>
+                </div>
+                <div class="question-text">
+                    During the delivery phase of your program, a program team member has reached you to inform you about new activities that can accelerate the program schedule. What will you do FIRST?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q54a" name="q54" value="A">
+                        <label for="q54a">Escalate to Program Governance board.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q54b" name="q54" value="B">
+                        <label for="q54b">Create a change request.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q54c" name="q54" value="C">
+                        <label for="q54c">Update the program risk register.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q54d" name="q54" value="D">
+                        <label for="q54d">Update the program schedule.</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q54"></div>
+            </div>
+
+            <!-- Question 55 -->
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number">Question 55</span>
+                </div>
+                <div class="question-text">
+                    The Program governance comprises the framework, functions, and processes by which a program is monitored, managed, and supported in order to meet organizational strategic and operational goals. The Governance board ensures that the program is performing well and is on track to achieve expected program benefits. Within the above context, which of the following is the best tool used by the governance board for this?
+                </div>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" id="q55a" name="q55" value="A">
+                        <label for="q55a">Earned value forecasting.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q55b" name="q55" value="B">
+                        <label for="q55b">Program governance plan.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q55c" name="q55" value="C">
+                        <label for="q55c">Program benefits metrics.</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" id="q55d" name="q55" value="D">
+                        <label for="q55d">Program periodic health checks</label>
+                    </div>
+                </div>
+                <div class="result" id="result-q55"></div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Quiz</button>
+        </form>
+
+        <button class="reset-btn" id="reset-btn" style="display:none;">Reset Quiz</button>
+    </div>
+
+   <script>
+        // Quiz data with correct answers and explanations
+        const quizData = {
+            q1: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Send them the mission, vision, and benefits of the program with the clarification of how the program will benefit the stakeholders and the organization. Some stakeholders view the program benefits as change and resist it. Option A is wrong because understanding of expectations is already done. Options B and C are wrong because you have to balance between activities related to mitigating the effect of stakeholders who view the program negatively and encouraging the active support of stakeholders who see the program as a positive contribution.'
+            },
+            q2: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Program infrastructure. For many programs, the PMO is a core part of the program infrastructure. It supports the management and coordination of the program and component work. The PMO also establishes consistent policy, standards, and training for programs. Another key element of the program infrastructure is the PMIS which consists of tools used to collect, integrate, and communicate information critical to effective management.'
+            },
+            q3: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Resolution of project issues at the project level. You cannot expect project-level issues to be resolved always at the project level. There may be some issues that are better resolved at the program level or higher. The remaining three options are most likely for an effective program governance structure.'
+            },
+            q4: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Program business case. Programs are linked to the organization\'s strategic plan. The business case is developed to assess the investment of the program against its intended benefits. In this situation, improving the level of behavior and morality in the neighborhood is an example of the benefit of the program to consider when it is proposed to the Selection Committee.'
+            },
+            q5: {
+                correct: 'A',
+                explanation: 'The correct answer is A: The program roadmap. The benefits register includes mapping of the planned benefits to the program components, as reflected in the program roadmap. It includes list of planned benefits, description of how each benefit will be measured, key performance indicators, risk assessment, status indicators, target dates and milestones, and responsible persons.'
+            },
+            q6: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Program Master Schedule. The program master schedule is the top-level planning document that defines individual component schedules and dependencies among program components required to achieve the program goals. It includes component milestones and program-level activities including stakeholder engagement, risk mitigation, and program reviews. The roadmap includes major milestones but no activities.'
+            },
+            q7: {
+                correct: 'B',
+                explanation: 'The correct answer is B: Program high-level scope statement. The program charter, business case, and benefits register cannot be submitted to all stakeholders because they contain investments, calculations, profits, and very important data that cannot be published. The best option is the program\'s high-level scope statement which can be published to all stakeholders and contains the major product, service, or result with features and functions at a high level.'
+            },
+            q8: {
+                correct: 'A',
+                explanation: 'The correct answer is A: The expected levels of value that will be delivered from the tangible and intangible benefits are not clearly documented in the business case. The business case serves as a formal declaration of the value that the program is expected to deliver and a justification for the resources that will be expended. Options B and C are wrong because stakeholders are already available and contributing. Option D is wrong because no values are documented in the benefits register.'
+            },
+            q9: {
+                correct: 'B',
+                explanation: 'The correct answer is B: Program B. Cost to Benefits Ratio = CBR = Cost/Benefits. If the benefit increased, the CBR will be decreased. So the lowest value will be selected which is CBR=0.5 for Program B.'
+            },
+            q10: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Program Stakeholders register. The stakeholder register lists the stakeholders and categorizes their relationship to the program, their ability to influence the program outcome, their degree of support for the program, and other characteristics that could influence the stakeholders\' perception and the program\'s outcomes. The program manager will categorize them to highlight differences in their needs, expectations, or influence.'
+            },
+            q11: {
+                correct: 'D',
+                explanation: 'The correct answer is D: The program is late and you spent less than planned. According to the data in the table, all projects are late with SPI less than one and all projects under budget with CPI more than one. So option D is correct.'
+            },
+            q12: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Contacting the functional manager for profiles. When the structure of the organization is not mentioned in the question, you should consider it as a matrix organization. The functional manager focuses on providing management oversight for a functional or business unit. Option A is wrong because human resources are outside control of your colleagues. Option B is wrong because the human resource team is under control of the functional manager. Option D is wrong because you have to check resources in your organization first.'
+            },
+            q13: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Program Scope Statement. The program scope statement contains the program scope boundaries which define what\'s included and what\'s excluded from the program scope. It clearly defines the extent of the program scope. Option A is wrong because business case contains analyses that can be used to establish high-level scope boundaries. Option B is wrong because Program Charter contains high-level scope. Option C is wrong because the program WBS is a deliverable-oriented decomposition.'
+            },
+            q14: {
+                correct: 'B',
+                explanation: 'The correct answer is B: Request everyone in the meeting to say his point of view about the meeting. You have to ask all component managers to say their point of view, because if you ask him alone, he may be embarrassed in front of others. If he doesn\'t say his point of view, you have to meet him alone in your office to discuss the reasons, then take the decision, either send him for communication training or escalate to the governance board or the Sponsor.'
+            },
+            q15: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Program Sponsor. A program sponsor is an individual or a group that provides resources and support for the program and is accountable for enabling success. The program sponsor is often the champion of the program. The program sponsor is required to drive changes through the organization so that operations can accommodate capabilities delivered by the program, and secure the available positive benefits, and steward the handling of negative benefits.'
+            },
+            q16: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Assign the senior consultant to the components as prioritized by the guidelines in the program resources management plan. Resource prioritization allows the program manager to prioritize the use of resources that are not available in abundance and to optimize their use across all components. The program resources management plan describes the guidelines for making program resource prioritization decisions and resolving resource conflicts. Option A is wrong because you have to optimize the use of scarce resources.'
+            },
+            q17: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Document the key performance indicators and the metrics in the program stakeholder engagement plan. Documentation of the metrics and KPIs in the program stakeholder engagement plan before the approval of them as a part of the stakeholder engagement plan. The plan defines the metrics used to measure the performance of stakeholder engagement activities. This could include measures of participation in meetings and other communication channels, and the degree of active or passive support or resistance.'
+            },
+            q18: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Develop a clear document of these technical points and their impacts, and inform the customer in a virtual meeting about them, then get their preference about releasing the airport. The receiving entity should have a clear understanding of the capabilities or results to be transitioned and what is required for the entity to successfully sustain the benefits. All pertinent documents, training and materials, supporting systems, facilities, and personnel are typically provided during the transition.'
+            },
+            q19: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Understanding of expectation of program benefits delivery. As part of the stakeholder analysis and engagement planning, you have to evaluate the stakeholders\' expectation of program benefits delivery before their ability to influence the outcome. The following aspects are considered: organizational culture, attitudes about the program, relevant phases, expectation of program benefits delivery, degree of support, and ability to influence the outcome.'
+            },
+            q20: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Identify the stakeholders of the three existing buildings. Options A and D are wrong because they will be updated later after stakeholder identification. The benefits are based on the stakeholder expectations. The purpose of the benefits identification phase is to analyze available information to identify and qualify the benefits that program stakeholders expect to realize. Option B is wrong because understanding of needs and expectations comes after stakeholders\' identification.'
+            },
+            q21: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Program benefits management plan. Defining and prioritizing program components and their interdependencies is one of the activities that make up benefits analysis and planning. The purpose of the benefits analysis and planning phase is to establish the program benefits management plan and develop the benefits metrics and framework for monitoring and controlling both the components and the measurement of benefits within the program.'
+            },
+            q22: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Program Roadmap. The program roadmap can be used to show how benefits are delivered within major stages or milestones; however, it may include the component details, their durations, and contributions to benefits. The roadmap is an effective way to communicate the overarching plan and benefits to stakeholders to build and maintain advocacy. Options A and B are wrong because they don\'t contain milestones. Option C is wrong because it doesn\'t contain a milestones plan.'
+            },
+            q23: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Throughout the program life cycle. Program Strategy Alignment is the performance domain that identifies program outputs and outcomes to provide benefits aligned with the organization\'s strategic goals and objectives. During the execution of the program formulation sub-phase, the program strategy alignment process is initiated and runs until the end of the program life cycle.'
+            },
+            q24: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Stakeholders register. This register lists the stakeholders and categorizes their relationship to the program, their ability to influence the program outcome, their degree of support for the program, and other characteristics or attributes the program manager feels could influence the stakeholders\' perception and the program\'s outcomes.'
+            },
+            q25: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Project management plans. Review project managers\' performance in executing the project in accordance with the project plan in order to maximize their contribution to achieving program goals.'
+            },
+            q26: {
+                correct: 'A',
+                explanation: 'The correct answer is A: Provide training to the component managers on program benefits, objectives, strategy, and goals. You have to give training to the component managers on the program benefits, objectives, goals, program strategy, and interdependencies between the components to know how to identify the risks and issues that may impact other components and to know which risk and issue will be escalated to the program manager. Options B, C, and D cannot teach them how to recover their weak points.'
+            },
+            q27: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Update risk, schedule, cost, scope, and benefits management plans. Program change request steps include: 1) Record in change log, 2) Analyze the request, 3) Submit to governance board if needed, 4) Update change log with decision, 5) Update the impacted areas in the program, 6) Update the program management plan, 7) Reflect updates to component plans, 8) Communicate the decision, 9) Implement the approved change.'
+            },
+            q28: {
+                correct: 'A',
+                explanation: 'The correct answer is A: Program Manager. The program manager is responsible for monitoring and managing program risks, performance, and communications. Program managers spend a significant amount of time and effort communicating with the program stakeholders. Option B is wrong, PMO is supporting program communications. Option C is wrong, project manager is responsible for communications of his project. Option D is wrong, sponsor is integral to the communication processes and provides guidance and support.'
+            },
+            q29: {
+                correct: 'B',
+                explanation: 'The correct answer is B: Program Delivery Phase. Typical financial management activities during the delivery phase include identifying factors that create changes to the budget baseline, monitoring environmental factors, managing changes when they occur, monitoring costs reallocation, monitoring contract expenditures, implementing earned value management, identifying impacts to program components from overruns or underruns, communicating changes to governance groups, and managing expenditure on program infrastructure.'
+            },
+            q30: {
+                correct: 'A',
+                explanation: 'The correct answer is A: What-if analyses. When conducting environmental analysis for a strategic initiative and/or business case, it is important to consider that competing efforts may reside within or external to the organization. A typical business case includes analysis and comparison against real or hypothetical alternative scenarios. Where appropriate, comparative advantage analysis may also include what-if analyses to illustrate how the program\'s objectives and intended benefits could be achieved by other means.'
+            },
+            q31: {
+                correct: 'B',
+                explanation: 'The correct answer is B: Values. Organization\'s vision and mission are used as input to the strategic planning cycle and are reflected throughout the strategic plan. The strategic planning cycle results in the creation or update of the organization\'s strategic goals and objectives which is documented in the organization\'s strategic plan. The Values are the least significant element because they will be achieved after the usage of the benefits.'
+            },
+            q32: {
+                correct: 'B',
+                explanation: 'The correct answer is B: The period between scheduled decision-point reviews. Program periodic health checks, generally held between decision-point reviews, assess a program\'s ongoing performance and progress toward the realization and sustainment of benefits. The importance and use of these reviews increase when there is an extended period between scheduled decision-point reviews. The number of change requests and program risk tolerance can affect the number of decision point reviews that will increase or decrease the period between them.'
+            },
+            q33: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Develop escalation policies and procedures. Options B, C, and D are elements in option A "program governance plan". The program governance plan will solve the problem, but option C is the best and specific option. Establish escalation policies and procedures to ensure risks are handled at the appropriate level. Each program\'s governance frameworks, functions, and processes are summarized in a program governance plan. Effective risk and issue management practices ensure that key risks and issues are escalated appropriately and resolved timely.'
+            },
+            q34: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Program governance plan. Now you are in the delivery phase. Option A is wrong because the program charter includes the recommended Program governance that will be updated in the program governance plan. Option B is wrong; the Business case includes the authority of the sponsorship only not the program manager. Option C is wrong, no authority is included in the roadmap. Option D is correct; the program governance plan describes the structure and composition of governance participants and defines the roles and responsibilities of key stakeholders.'
+            },
+            q35: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Delivery phase. A program change request is a formal proposal to modify any program document, deliverable, or baseline. So the request after approving the program management plan means during the delivery phase. During the course of program delivery, change requests that fall within the program manager\'s authority level will be approved or rejected to manage performance and any changes to the program management plan. Changes outside the program manager authority should be escalated to the program governance board.'
+            },
+            q36: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Develop escalation policies and procedures. Options B, C, and D are elements in option A "program governance plan". The program governance plan will solve the problem, but option C is the best and specific option. Establish escalation policies and procedures to ensure risks are handled at the appropriate level. Each program\'s governance frameworks, functions, and processes are summarized in a program governance plan. Effective risk and issue management practices ensure that key risks and issues are escalated appropriately and resolved in a timely manner.'
+            },
+            q37: {
+                correct: 'B',
+                explanation: 'The correct answer is B: Program performance report. Program performance reports include a summary of the progress of all program components. They describe whether the program\'s goals will be met and benefits will be successfully delivered according to plan. These reports generally provide current status information about what work has been accomplished (especially milestones and phase gates); what work remains to be completed; earned value; and risks, issues, and changes under consideration.'
+            },
+            q38: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Do the impact analysis to know the effect of closing that project on other components of the program. Option A is wrong because the program manager will not escalate without recommendations. Option B is wrong, the program manager hasn\'t decided yet that the program will be recommended for closing. Option C is correct: There is no decision for closing the project yet. The program manager has to analyze the impact of the misalignment issue and the closing project risk on the program.'
+            },
+            q39: {
+                correct: 'A',
+                explanation: 'The correct answer is A: Program management plan and roadmap. Programs often have a significant level of uncertainty. While the program management plan and program roadmap may document the intended direction and benefits of the program.'
+            },
+            q40: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Program Benefits sustainment activities. Developing business cases and the potential initiation of new projects or programs to respond to operational issues with the deployed product, service, or capability is being supported or public acceptance/reaction to the improvement or to legislative changes; political, economic, and socioeconomic changes; cultural shifts; or logistics issues with a deployed product. Option A is wrong because the business case in the question is not for the main program, it\'s only for responding to operational issues. Option B is wrong no development for business case in identification activities. Option C is wrong no development of business cases in transition activities.'
+            },
+            q41: {
+                correct: 'A',
+                explanation: 'The correct answer is A: Explain to them that the closure conditions of the component are met. After program components have produced deliverables and coordinated successful delivery, these components are typically scheduled for closure or transition to operations. The criteria for performing these activities and organizational expectations are documented in the governance plan. The review includes confirming that the business case has been sufficiently satisfied, ensuring appropriate communications, ensuring component compliance with quality control plans, and assessing lessons learned.'
+            },
+            q42: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Components transition. The transition of the components is done during the delivery phase. Prior to the end of the program delivery phase, all component areas are reviewed to verify that the benefits were delivered and to transition any remaining projects and sustaining activities. Options A, B and D are wrong; all are performed during program transition. During program transition, the program steering committee is consulted to determine whether the program has met all desired benefits and that all transition work has been performed.'
+            },
+            q43: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Present the final performance report to the governance board. Option A is wrong because all components and their contracts are already closed. Option B is wrong because we cannot transition the program without approval from the steering committee. Option D is wrong because all components are already transitioned during the delivery phase. Option C is Correct: For transition or closing the program we have to get approval from the steering committee. The program closure phase includes program activities necessary to transition program benefits and formally close the program in a controlled manner.'
+            },
+            q44: {
+                correct: 'C',
+                explanation: 'The correct answer is C: OPM. OPM provides a framework in which portfolio, program, and project management practices are integrated to achieve strategic objectives. OPM supports the coordinated practice of portfolio, program, and project management by linking principles and practices. OPM is employed to produce improved performance, better results, and sustainable strategic benefits for organizations. Option A is wrong because it\'s not mentioned PMO for portfolio, program, or project. Option B is wrong because program governance board can provide framework for the overall program, but not the portfolio.'
+            },
+            q45: {
+                correct: 'D',
+                explanation: 'The correct answer is D: By ensuring that the strategies and work plans of the program and its components are responsively adapted to component outcomes, or to changes in the direction or strategies of the sponsoring organization. The program manager has to ensure that the strategies and the plans of both program and its components are responsively adapted to the outcomes of the components, or to changes in the direction or strategies of the sponsoring organization. A primary role of the program manager is to monitor outputs and outcomes of component activities and ensure the program adapts appropriately.'
+            },
+            q46: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Program Roadmap. Here the keyword is Visual. Depending on the nature of the program, the program roadmap is a graphical representation of the incremental benefits and provides a visual of when the return on investment may help fund the future program benefits and outcomes. We know that the program business case is a documented economic feasibility study used to establish the validity of the benefits to be delivered by a program, but will not provide visual information.'
+            },
+            q47: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Will be managed as a portfolio. Component projects or programs that do not advance common or complementary goals; or that do not jointly contribute to the delivery of common benefits; or that are related only by common sources of support, technology, or stakeholders are often better managed as portfolios rather than as programs. The components of your existing program are not related to the new projects. The new 15 projects are not related, so you cannot manage them as a program or subsidiary program.'
+            },
+            q48: {
+                correct: 'D',
+                explanation: 'The correct answer is D: The program steering committee. A program sponsor is an individual or a group that provides resources and support for the program and is accountable for enabling success. A program steering committee may assume the role of a program sponsor. However, the program sponsor is usually an individual executive who is committed to ensuring that the program is appropriately supported and able to deliver its intended benefits. The program sponsor role is frequently filled by an executive member of the program steering committee.'
+            },
+            q49: {
+                correct: 'A',
+                explanation: 'The correct answer is A: Escalate the matter to the program sponsor. A program sponsor is an individual or a group that provides resources and support for the program and is accountable for enabling success.'
+            },
+            q50: {
+                correct: 'B',
+                explanation: 'The correct answer is B: Meet the program manager X for optimization of resources and need then inform the sponsor when the resource can be available to your program and plan accordingly. Since your program is not critical to the portfolio, the priority will be for program X. You have to meet the program manager of program X for optimizing the usage of the scarce resource, and inform your proposal to the sponsor to take the decision because you and program manager X are program managers under the sponsoring portfolio.'
+            },
+            q51: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Review the program quality management plan. It is beneficial to analyze program quality to evaluate it across the program with the goal of combining quality tests and inspections to reduce costs, where feasible. If tests are not coordinated, products and deliverables could be tested several times throughout a program and a cost incurred for no valid reason. The quality management plan provides the quality assurance measures and quality controls that are incorporated in the program and the methods of inspection based on the program scope.'
+            },
+            q52: {
+                correct: 'B',
+                explanation: 'The correct answer is B: 1,500,000$. If the risk (R1) of project1 occurred, you have to subtract the total impact of the risk ($80,000) from the contingency reserve of the project ($145,000). The remaining contingency reserve of project1 = 145,000 - 80,000 = $65,000. The program manager may hold contingency reserves at the program level to support risk responses. The program contingency reserve is not a substitute for the component contingency reserve, which is held at the component level. So the program contingency reserve will not be impacted by the project\'s contingency reserve.'
+            },
+            q53: {
+                correct: 'B',
+                explanation: 'The correct answer is B: Formulation Sub-phase. During the program schedule assessment in the formulation sub-phase. The initial assessment should state the level of confidence in the assessment of activity durations and identify where alternative activities could be initiated if activities run into excessive delays.'
+            },
+            q54: {
+                correct: 'C',
+                explanation: 'The correct answer is C: Update the program risk register. If you discovered a risk, you have to identify and analyze then assign an appropriate response. Schedule control involves identifying not only slippages but also opportunities to accelerate program or component schedules and should be used for proper risk management. Program schedule risks should be tracked as part of the risk management activity.'
+            },
+            q55: {
+                correct: 'D',
+                explanation: 'The correct answer is D: Program periodic health checks. Program periodic health checks, generally held between decision-point reviews, assess a program\'s ongoing performance and progress toward the realization and sustainment of benefits. Governance plan, earned value forecasts and benefits metrics can all help. But the best tool is periodic health check review meetings.'
+            }
+        };
+
+        const form = document.getElementById('quiz-form');
+        const resetBtn = document.getElementById('reset-btn');
+        const scoreSummary = document.getElementById('score-summary');
+        const scoreText = document.getElementById('score-text');
+        const scoreDetails = document.getElementById('score-details');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let score = 0;
+            let totalQuestions = Object.keys(quizData).length
+			// Check each question
+        for (let question in quizData) {
+            const selectedAnswer = document.querySelector(`input[name="${question}"]:checked`);
+            const resultDiv = document.getElementById(`result-${question}`);
+            const options = document.querySelectorAll(`input[name="${question}"]`);
+            
+            if (selectedAnswer) {
+                const isCorrect = selectedAnswer.value === quizData[question].correct;
+                
+                if (isCorrect) {
+                    score++;
+                    resultDiv.className = 'result correct-answer show';
+                    resultDiv.innerHTML = `
+                        <h4 style="color: #28a745; margin-bottom: 10px;">&#10003; Correct!</h4>
+                        <div class="explanation">
+                            <h4>Explanation:</h4>
+                            <p>${quizData[question].explanation}</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.className = 'result wrong-answer show';
+                    resultDiv.innerHTML = `
+                        <h4 style="color: #dc3545; margin-bottom: 10px;">&#10007; Incorrect</h4>
+                        <p style="margin-bottom: 10px;"><strong>Correct Answer: ${quizData[question].correct}</strong></p>
+                        <div class="explanation">
+                            <h4>Explanation:</h4>
+                            <p>${quizData[question].explanation}</p>
+                        </div>
+                    `;
+                }
+                
+                // Highlight options
+                options.forEach(option => {
+                    const optionDiv = option.closest('.option');
+                    if (option.value === quizData[question].correct) {
+                        optionDiv.classList.add('correct');
+                    } else if (option.checked) {
+                        optionDiv.classList.add('wrong');
+                    } else {
+                        optionDiv.classList.add('not-selected');
+                    }
+                    option.disabled = true;
+                });
+            }
+        }
+        
+        // Show score summary
+        const percentage = ((score / totalQuestions) * 100).toFixed(1);
+        scoreSummary.classList.add('show');
+        scoreText.textContent = `Your Score: ${score}/${totalQuestions}`;
+        scoreDetails.textContent = `You got ${percentage}% correct`;
+        
+        // Scroll to top to show score
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Disable submit button and show reset button
+        document.querySelector('.submit-btn').disabled = true;
+        resetBtn.style.display = 'block';
+    });
+
+    resetBtn.addEventListener('click', function() {
+        // Reset form
+        form.reset();
+        
+        // Clear all results and highlights
+        document.querySelectorAll('.result').forEach(result => {
+            result.className = 'result';
+            result.innerHTML = '';
+        });
+        
+        document.querySelectorAll('.option').forEach(option => {
+            option.classList.remove('correct', 'wrong', 'not-selected');
+        });
+        
+        document.querySelectorAll('input[type="radio"]').forEach(input => {
+            input.disabled = false;
+        });
+        
+        // Hide score summary and reset button
+        scoreSummary.classList.remove('show');
+        resetBtn.style.display = 'none';
+        document.querySelector('.submit-btn').disabled = false;
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+</body>
+</html>
